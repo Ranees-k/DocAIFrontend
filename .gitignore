@@ -83,3 +83,5 @@ jspm_packages/
 
 # DynamoDB Local files
 .dynamodb/
+# Netlify redirects file
+!public/_redirects
