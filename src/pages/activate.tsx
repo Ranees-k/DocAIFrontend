@@ -21,6 +21,60 @@ const Activate = () => {
 
   useEffect(() => {
     if (token) {
+      const activateAccount = async (activationToken: string) => {
+        try {
+          setActivationState({
+            status: 'loading',
+            message: 'Activating your account...'
+          });
+  
+          const response = await fetch(`${API_BASE_URL}/auth/activate/${activationToken}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+  
+          const data = await response.json();
+  
+          if (response.ok) {
+            setActivationState({
+              status: 'success',
+              message: data.message || 'Your account has been successfully activated!'
+            });
+  
+            toast({
+              title: "Account Activated",
+              description: "Your account is now active. You can now log in.",
+            });
+  
+            // Redirect to login after 3 seconds
+            setTimeout(() => {
+              navigate('/login');
+            }, 3000);
+          } else {
+            if (response.status === 410) {
+              setActivationState({
+                status: 'expired',
+                message: data.message || 'This activation link has expired. Please request a new one.'
+              });
+            } else {
+              setActivationState({
+                status: 'error',
+                message: data.message || 'Activation failed. Please try again.'
+              });
+            }
+          }
+        } catch (error: any) {
+          console.error('Activation error:', error);
+          setActivationState({
+            status: 'error',
+            message: 'Network error. Please check your connection and try again.'
+          });
+        }
+      };
+  
+      // ✅ call the async function
       activateAccount(token);
     } else {
       setActivationState({
@@ -28,60 +82,10 @@ const Activate = () => {
         message: 'Invalid activation link'
       });
     }
-  }, [token]);
+  }, [token, navigate]);
+  
 
-  const activateAccount = async (activationToken: string) => {
-    try {
-      setActivationState({
-        status: 'loading',
-        message: 'Activating your account...'
-      });
-
-      const response = await fetch(`${API_BASE_URL}/auth/activate/${activationToken}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setActivationState({
-          status: 'success',
-          message: data.message || 'Your account has been successfully activated!'
-        });
-
-        toast({
-          title: "Account Activated",
-          description: "Your account is now active. You can now log in.",
-        });
-
-        // Redirect to login after 3 seconds
-        setTimeout(() => {
-          navigate('/login');
-        }, 3000);
-      } else {
-        if (response.status === 410) {
-          setActivationState({
-            status: 'expired',
-            message: data.message || 'This activation link has expired. Please request a new one.'
-          });
-        } else {
-          setActivationState({
-            status: 'error',
-            message: data.message || 'Activation failed. Please try again.'
-          });
-        }
-      }
-    } catch (error: any) {
-      console.error('Activation error:', error);
-      setActivationState({
-        status: 'error',
-        message: 'Network error. Please check your connection and try again.'
-      });
-    }
-  };
+ 
 
   const handleResendActivation = async () => {
     try {
