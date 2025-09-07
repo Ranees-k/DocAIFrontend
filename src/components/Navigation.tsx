@@ -1,5 +1,5 @@
 import { Button } from "../components/ui/button";
-import { Sparkles, Menu, X, Link } from "lucide-react";
+import { Sparkles, Menu, X } from "lucide-react";
 // import { ThemeToggle } from "../components/ThemeToggle";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

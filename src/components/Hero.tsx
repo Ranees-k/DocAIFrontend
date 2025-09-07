@@ -1,5 +1,5 @@
 import { Button } from "../components/ui/button";
-import { ArrowRight, Play, Sparkles, Zap, Shield, Brain, FileSearch, Rocket } from "lucide-react";
+import { ArrowRight, Play, Zap, Shield, Brain, FileSearch, Rocket } from "lucide-react";
 // import heroImage from "../assets/hero-image.jpg";
 
 export function Hero() {
