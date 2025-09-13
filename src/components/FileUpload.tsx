@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Button } from './ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Card, CardContent } from './ui/card';
 import { Progress } from './ui/progress';
-import { Upload, File, X, CheckCircle, AlertCircle, FileText, Loader2, Sparkles, Zap, Brain, ArrowRight } from 'lucide-react';
+import { Upload, File, X, CheckCircle, AlertCircle, FileText, Loader2, Sparkles, Zap, ArrowRight } from 'lucide-react';
 import { toast } from '../hooks/use-toast';
 
 interface FileUploadProps {

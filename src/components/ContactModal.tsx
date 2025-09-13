@@ -4,7 +4,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
-import { Mail, User, MessageSquare, Phone, Send, Brain, ArrowRight, X } from 'lucide-react';
+import { Mail, User, MessageSquare, Phone, Send, Brain, ArrowRight} from 'lucide-react';
 import { toast } from '../hooks/use-toast';
 
 interface ContactFormData {
