@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback } from "./ui/avatar";
-import { Send, Bot, User, Sparkles, AlertCircle, Loader2 } from "lucide-react";
+import { Send, Bot, User, Sparkles, AlertCircle, Loader2, Brain, MessageCircle } from "lucide-react";
 import { toast } from "../hooks/use-toast";
 import { API_BASE_URL } from '../config/api';
 
@@ -209,90 +209,87 @@ export function ChatInterface({ fileDetails }: { fileDetails: FileDetails | null
   // Show error state if no file uploaded
   if (!fileDetails) {
     return (
-      <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden">
-        <div className="max-w-5xl mx-auto relative z-10">
-          <Card className="glass-morphism border-red-200 shadow-glow">
-            <CardContent className="p-8 text-center">
-              <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-red-600 mb-2">No Document Uploaded</h3>
-              <p className="text-gray-600 mb-4">
-                Please upload a document first to start asking questions.
-              </p>
-              <Button 
-                onClick={() => window.location.href = '/upload'}
-                className="bg-red-500 hover:bg-red-600 text-white"
-              >
-                Upload Document
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+      <div className="w-full max-w-4xl mt-10 mx-auto px-4 sm:px-6">
+        <Card className="bg-white/80 mb-10 backdrop-blur-sm border-0 shadow-lg rounded-2xl overflow-hidden">
+          <CardContent className="p-6 text-center">
+            <div className="w-12 h-12 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <AlertCircle className="w-6 h-6 text-purple-600" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-800 mb-2">No Document Available</h3>
+            <p className="text-gray-600 mb-4 text-sm">
+              Please upload a document first to start asking questions.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/10 to-background" />
-      <div className="absolute top-10 sm:top-20 left-10 sm:left-20 w-24 h-24 sm:w-32 sm:h-32 bg-primary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
-      <div className="absolute bottom-20 right-10 sm:right-20 w-28 h-28 sm:w-36 sm:h-36 bg-accent/25 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-      
-      <div className="max-w-5xl mx-auto relative z-10">
-        <div className="text-center mb-12 sm:mb-16 animate-fade-in-up">
-          <div className="inline-flex text-black items-center gap-2 bg-gradient-primary text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-bold mb-4 sm:mb-6 shadow-glow animate-glow">
-            <Bot className="w-4 h-4 text-black sm:w-5 sm:h-5" />
-            AI Chat Assistant
-          </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-gradient mb-4 sm:mb-6">
-            Chat with Your Documents
-          </h2>
-          <p className="text-lg sm:text-xl text-foreground/80 leading-relaxed max-w-4xl mx-auto">
-            Ask anything about your uploaded files. Our AI provides instant, intelligent answers with context.
-          </p>
-          
-          {/* File info */}
-          {fileDetails && (
-            <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg inline-block">
-              <p className="text-sm text-green-700">
-                <strong>Document:</strong> {fileDetails.filename}
-              </p>
-            </div>
-          )}
+    <div className="w-full max-w-4xl mt-10 mx-auto px-4 sm:px-6">
+      {/* Header Section */}
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-purple-800 text-white px-6 py-3 rounded-full text-sm font-semibold mb-4 shadow-lg">
+          <MessageCircle className="w-5 h-5" />
+          AI Chat Assistant
         </div>
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+          Chat with Your Documents
+        </h2>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Ask anything about your uploaded files. Our AI provides instant, intelligent answers with context.
+        </p>
+        
+        {/* File info */}
+        {fileDetails && (
+          <div className="mt-6 inline-flex items-center gap-2 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl px-4 py-2">
+            <div className="w-2 h-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></div>
+            <span className="text-sm text-purple-700 font-medium">
+              <strong>Document:</strong> {fileDetails.filename}
+            </span>
+          </div>
+        )}
+      </div>
 
-        <Card className="glass-morphism border-primary/20 shadow-glow animate-scale-in" style={{ animationDelay: '0.3s' }}>
-          <CardHeader className="pb-4 sm:pb-6 border-b border-primary/10">
-            <CardTitle className="flex items-center gap-3 text-lg sm:text-xl">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-glow animate-glow">
-                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+      {/* Main Chat Area */}
+      <div className="relative">
+        <Card className="relative bg-white/80 backdrop-blur-sm border-0 shadow-2xl rounded-3xl overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 border-b border-purple-100 p-6">
+            <CardTitle className="flex items-center gap-4 text-xl">
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-purple-800 rounded-2xl flex items-center justify-center shadow-lg">
+                <Brain className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1">
-                <div className="font-black text-gradient">AI Assistant</div>
-                <div className="text-xs sm:text-sm text-foreground/60 font-normal">Powered by Advanced AI</div>
+                <div className="font-bold text-gray-800">AI Assistant</div>
+                <div className="text-sm text-gray-600 font-normal">Powered by Advanced AI</div>
               </div>
               <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full shadow-glow ${
-                  isLoading ? 'bg-yellow-500 animate-pulse' : 'bg-primary animate-pulse'
+                <div className={`w-3 h-3 rounded-full ${
+                  isLoading ? 'bg-yellow-500 animate-pulse' : 'bg-green-500'
                 }`} />
-                <span className="text-xs sm:text-sm text-foreground/60 font-medium">
+                <span className="text-sm text-gray-600 font-medium">
                   {isLoading ? 'Processing...' : 'Online'}
                 </span>
               </div>
             </CardTitle>
           </CardHeader>
           
-          <CardContent className="p-4 sm:p-6">
+          <CardContent className="p-6">
             {/* Error message */}
             {error && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
-                <span className="text-sm text-red-700">{error}</span>
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-3">
+                <div className="p-2 bg-red-100 rounded-xl">
+                  <AlertCircle className="w-5 h-5 text-red-500" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-red-800">Error</p>
+                  <p className="text-red-700 text-sm">{error}</p>
+                </div>
                 <Button
                   onClick={handleRetry}
                   size="sm"
                   variant="outline"
-                  className="ml-auto text-red-600 border-red-300 hover:bg-red-50"
+                  className="text-red-600 border-red-300 hover:bg-red-50 rounded-xl"
                 >
                   Retry
                 </Button>
@@ -300,42 +297,41 @@ export function ChatInterface({ fileDetails }: { fileDetails: FileDetails | null
             )}
 
             {/* Messages */}
-            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 max-h-80 sm:max-h-96 overflow-y-auto">
+            <div className="space-y-6 mb-8 max-h-96 overflow-y-auto pr-2">
               {messages.map((message, messageIndex) => (
                 <div
                   key={message.id}
-                  className={`flex gap-3 sm:gap-4 animate-fade-in ${
+                  className={`flex gap-4 ${
                     message.sender === "user" ? "justify-end" : "justify-start"
                   }`}
-                  style={{ animationDelay: `${0.1 * messageIndex}s` }}
                 >
                   {message.sender === "ai" && (
-                    <Avatar className="w-8 h-8 sm:w-10 sm:h-10 shadow-glow flex-shrink-0">
-                      <AvatarFallback className="bg-gradient-primary text-white">
-                        <Bot className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Avatar className="w-10 h-10 flex-shrink-0">
+                      <AvatarFallback className="bg-gradient-to-r from-purple-600 to-purple-800 text-white">
+                        <Bot className="w-5 h-5" />
                       </AvatarFallback>
                     </Avatar>
                   )}
                   
                   <div
-                    className={`max-w-[85%] sm:max-w-[75%] p-3 sm:p-4 rounded-2xl transition-all duration-300 hover:scale-105 ${
+                    className={`max-w-[80%] p-4 rounded-2xl ${
                       message.sender === "user"
-                        ? "bg-gradient-primary text-white shadow-glow"
-                        : "glass-morphism border border-primary/20 shadow-glow"
+                        ? "bg-gradient-to-r from-purple-600 to-purple-800 text-white shadow-lg"
+                        : "bg-gradient-to-r from-gray-50 to-purple-50 border border-purple-100"
                     }`}
                   >
-                    <p className="text-sm sm:text-sm leading-relaxed">{message.content}</p>
+                    <p className="text-sm leading-relaxed">{message.content}</p>
                     <p className={`text-xs mt-2 ${
-                      message.sender === "user" ? "text-white/70" : "text-foreground/50"
+                      message.sender === "user" ? "text-white/70" : "text-gray-500"
                     }`}>
                       {message.timestamp.toLocaleTimeString()}
                     </p>
                   </div>
                   
                   {message.sender === "user" && (
-                    <Avatar className="w-8 h-8 sm:w-10 sm:h-10 shadow-glow flex-shrink-0">
-                      <AvatarFallback className="bg-gradient-accent text-white">
-                        <User className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Avatar className="w-10 h-10 flex-shrink-0">
+                      <AvatarFallback className="bg-gradient-to-r from-gray-600 to-gray-800 text-white">
+                        <User className="w-5 h-5" />
                       </AvatarFallback>
                     </Avatar>
                   )}
@@ -343,17 +339,17 @@ export function ChatInterface({ fileDetails }: { fileDetails: FileDetails | null
               ))}
               
               {isTyping && (
-                <div className="flex gap-3 sm:gap-4 justify-start animate-fade-in">
-                  <Avatar className="w-8 h-8 sm:w-10 sm:h-10 shadow-glow">
-                    <AvatarFallback className="bg-gradient-primary text-white">
-                      <Bot className="w-4 h-4 sm:w-5 sm:h-5" />
+                <div className="flex gap-4 justify-start">
+                  <Avatar className="w-10 h-10">
+                    <AvatarFallback className="bg-gradient-to-r from-purple-600 to-purple-800 text-white">
+                      <Bot className="w-5 h-5" />
                     </AvatarFallback>
                   </Avatar>
-                  <div className="glass-morphism border border-primary/20 p-3 sm:p-4 rounded-2xl shadow-glow">
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-primary rounded-full animate-pulse glow-effect" />
-                      <div className="w-2 h-2 bg-primary rounded-full animate-pulse glow-effect" style={{ animationDelay: '0.2s' }} />
-                      <div className="w-2 h-2 bg-primary rounded-full animate-pulse glow-effect" style={{ animationDelay: '0.4s' }} />
+                  <div className="bg-gradient-to-r from-gray-50 to-purple-50 border border-purple-100 p-4 rounded-2xl">
+                    <div className="flex gap-2">
+                      <div className="w-2 h-2 bg-purple-600 rounded-full animate-pulse" />
+                      <div className="w-2 h-2 bg-purple-600 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
+                      <div className="w-2 h-2 bg-purple-600 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
                     </div>
                   </div>
                 </div>
@@ -361,30 +357,30 @@ export function ChatInterface({ fileDetails }: { fileDetails: FileDetails | null
             </div>
 
             {/* Input */}
-            <div className="flex gap-2 sm:gap-3">
+            <div className="flex gap-3">
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask anything about your documents..."
                 disabled={isLoading}
-                className="flex-1 glass-morphism border-primary/30 focus:border-primary h-10 sm:h-12 rounded-2xl text-sm sm:text-base px-3 sm:px-4 transition-all duration-300 focus:shadow-glow disabled:opacity-50"
+                className="flex-1 h-12 rounded-2xl border-purple-200 focus:border-purple-500 focus:ring-purple-500/20 text-sm px-4 transition-all duration-300 disabled:opacity-50"
               />
               <Button 
                 onClick={handleSend}
                 disabled={!input.trim() || isLoading}
-                className="bg-black text-white hover:shadow-glow transition-all duration-500 hover:scale-110 hover:-translate-y-1 h-10 sm:h-12 px-4 sm:px-6 rounded-2xl group animate-glow disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white h-12 px-6 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed group"
               >
                 {isLoading ? (
-                  <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
+                  <Loader2 className="w-5 h-5 animate-spin" />
                 ) : (
-                  <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-bounce" />
+                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 )}
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
-    </section>
+    </div>
   );
 }

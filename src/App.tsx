@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import NotFound from "../src/pages/notFound";
 import Chat from './pages/index';
 import Activate from './pages/activate';
+import UnderConstruction from './pages/UnderConstruction';
 
 function App() {
   const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/chat/:documentId" element={<Chat />} />
+            <Route path="/under-construction" element={<UnderConstruction />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
