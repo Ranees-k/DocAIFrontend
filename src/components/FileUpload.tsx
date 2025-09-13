@@ -101,7 +101,7 @@ export default function FileUpload({
         });
       }, 200);
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/file/upload || http://localhost:5001/file/upload`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/file/upload`, {
         method: "POST",
         body: formData,
       });
