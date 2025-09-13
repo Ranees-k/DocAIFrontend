@@ -4,6 +4,7 @@ import { Card, CardContent } from './ui/card';
 import { Progress } from './ui/progress';
 import { Upload, File, X, CheckCircle, AlertCircle, FileText, Loader2, Sparkles, Zap, ArrowRight } from 'lucide-react';
 import { toast } from '../hooks/use-toast';
+import { API_ENDPOINTS } from '../config/api';
 
 interface FileUploadProps {
   uploadProgress: number;
@@ -101,7 +102,7 @@ export default function FileUpload({
         });
       }, 200);
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/file/upload`, {
+      const response = await fetch(API_ENDPOINTS.DOCUMENTS.UPLOAD, {
         method: "POST",
         body: formData,
       });
