@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback } from "./ui/avatar";
-import { Send, Bot, User, Sparkles, AlertCircle, Loader2, Brain, MessageCircle } from "lucide-react";
+import { Send, Bot, User, AlertCircle, Loader2, Brain, MessageCircle } from "lucide-react";
 import { toast } from "../hooks/use-toast";
 import { API_BASE_URL } from '../config/api';
 
