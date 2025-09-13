@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Progress } from './ui/progress';
-import { Upload, File, X, CheckCircle, AlertCircle, FileText, Loader2 } from 'lucide-react';
+import { Upload, File, X, CheckCircle, AlertCircle, FileText, Loader2, Sparkles, Zap, Brain, ArrowRight } from 'lucide-react';
 import { toast } from '../hooks/use-toast';
 
 interface FileUploadProps {
@@ -101,7 +101,7 @@ export default function FileUpload({
         });
       }, 200);
 
-      const response = await fetch("http://localhost:5001/file/upload", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/file/upload || http://localhost:5001/file/upload`, {
         method: "POST",
         body: formData,
       });
@@ -163,14 +163,6 @@ export default function FileUpload({
     onFileDetailsChange?.(null);
   };
 
-  // const formatFileSize = (bytes: number) => {
-  //   if (bytes === 0) return '0 Bytes';
-  //   const k = 1024;
-  //   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-  //   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  //   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  // };
-
   const getFileIcon = (fileName: string) => {
     if (!fileName) return <File className="h-8 w-8 text-gray-500" />;
     
@@ -189,146 +181,191 @@ export default function FileUpload({
   };
 
   return (
-    <Card className="w-full max-w-2xl mt-10 mx-auto shadow-lg">
-      <CardHeader className="text-center pb-4">
-        <CardTitle className="flex items-center justify-center gap-2 text-2xl">
-          <Upload className="h-6 w-6 text-blue-600" />
-          Upload Document
-        </CardTitle>
-        <CardDescription className="text-gray-600">
-          Upload your document to start asking questions. Supported formats: PDF, TXT, DOC, DOCX
-        </CardDescription>
-      </CardHeader>
-      
-      <CardContent className="p-6">
-        {!uploadedFile ? (
-          <div
-            onClick={handleClick}
-            className={`border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all duration-200 ${
-              isUploading 
-                ? 'opacity-50 cursor-not-allowed border-gray-200' 
-                : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50 hover:shadow-md'
-            }`}
-          >
-            <input
-              ref={fileInputRef}
-              type="file"
-              onChange={handleFileSelect}
-              accept=".pdf,.txt,.doc,.docx"
-              className="hidden"
-              disabled={isUploading}
-            />
-            
-            <div className="flex flex-col items-center space-y-4">
-              <div className="p-4 bg-blue-100 rounded-full">
-                {isUploading ? (
-                  <Loader2 className="h-12 w-12 text-blue-600 animate-spin" />
-                ) : (
-                  <Upload className="h-12 w-12 text-blue-600" />
-                )}
-              </div>
-              
-              <div className="space-y-2">
-                <p className="text-xl font-semibold text-gray-700">
-                  {isUploading ? 'Uploading...' : 'Click to browse files'}
-                </p>
-                <p className="text-gray-500">
-                  {isUploading ? 'Please wait while your file is being processed' : 'or drag and drop your file here'}
-                </p>
-              </div>
-              
-              {!isUploading && (
-                <div className="flex flex-wrap justify-center gap-2 mt-4">
-                  <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
-                    PDF
-                  </span>
-                  <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
-                    TXT
-                  </span>
-                  <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
-                    DOC
-                  </span>
-                  <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
-                    DOCX
-                  </span>
-                </div>
-              )}
-              
-              <p className="text-sm text-gray-400 mt-4">
-                Maximum file size: 10MB
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {/* File Display */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center space-x-4">
-                  {getFileIcon(fileDetails?.filename)}
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 text-lg">
-                      {fileDetails?.filename}
-                    </h3>   
-                    <p className="text-xs text-gray-400 mt-1">
-                      Last modified: {fileDetails?.uploaded_at ? new Date(fileDetails.uploaded_at).toLocaleDateString() : 'Unknown'}
+    <div className="w-full max-w-4xl bg mt-10 mx-auto px-4 sm:px-6">
+      {/* Header Section */}
+ 
+
+      {/* Main Upload Area */}
+      <div className="relative">
+        {/* Background Elements */}
+        
+        <Card className="relative bg-white/80 backdrop-blur-sm border-0 shadow-2xl rounded-3xl overflow-hidden">
+          <CardContent className="p-0">
+            {!uploadedFile ? (
+              <div
+                onClick={handleClick}
+                className={`relative p-16 text-center cursor-pointer transition-all duration-500 group ${
+                  isUploading 
+                    ? 'opacity-60 cursor-not-allowed' 
+                    : 'hover:scale-[1.02]'
+                }`}
+              >
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  onChange={handleFileSelect}
+                  accept=".pdf,.txt,.doc,.docx"
+                  className="hidden"
+                  disabled={isUploading}
+                />
+                
+                {/* Animated Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-pink-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div className="relative z-10 flex flex-col items-center space-y-8">
+                  {/* Icon Container */}
+                  <div className="relative">
+                    <div className={`w-24 h-24 rounded-3xl flex items-center justify-center transition-all duration-500 ${
+                      isUploading 
+                        ? 'bg-gradient-to-r from-purple-200 to-pink-200' 
+                        : 'bg-gradient-to-r from-purple-600 to-purple-800 group-hover:from-purple-700 group-hover:to-purple-900 group-hover:scale-110 shadow-2xl'
+                    }`}>
+                      {isUploading ? (
+                        <Loader2 className="h-12 w-12 text-purple-600 animate-spin" />
+                      ) : (
+                        <Upload className="h-12 w-12 text-white group-hover:scale-110 transition-transform duration-300" />
+                      )}
+                    </div>
+                    
+          
+                  </div>
+                  
+                  {/* Text Content */}
+                  <div className="space-y-4">
+                    <h3 className="text-3xl font-bold text-gray-800">
+                      {isUploading ? 'Processing...' : 'Drop Your File Here'}
+                    </h3>
+                    <p className="text-xl text-gray-600 max-w-md">
+                      {isUploading 
+                        ? 'Our AI is analyzing your document' 
+                        : 'Click to browse or drag & drop your document'
+                      }
                     </p>
                   </div>
+                  
+                  {/* File Type Pills */}
+                  {!isUploading && (
+                    <div className="flex flex-wrap justify-center gap-3">
+                      {[
+                        { type: 'PDF', color: 'from-red-500 to-red-600' },
+                        { type: 'TXT', color: 'from-blue-500 to-blue-600' },
+                        { type: 'DOC', color: 'from-green-500 to-green-600' },
+                        { type: 'DOCX', color: 'from-purple-500 to-purple-600' }
+                      ].map(({ type, color }) => (
+                        <span 
+                          key={type}
+                          className={`px-4 py-2 bg-gradient-to-r ${color} text-white rounded-full text-sm font-medium shadow-lg hover:scale-105 transition-transform duration-200`}
+                        >
+                          {type}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  
+                  {/* Features */}
+                  <div className="flex items-center gap-8 text-sm text-gray-500">
+                    <div className="flex items-center gap-2">
+                      <Zap className="h-4 w-4 text-purple-600" />
+                      <span>Instant Analysis</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="h-4 w-4 text-purple-600" />
+                      <span>AI Powered</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <File className="h-4 w-4 text-purple-600" />
+                      <span>Max 10MB</span>
+                    </div>
+                  </div>
                 </div>
-                
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={onFileRemove}
-                  disabled={isUploading}
-                  className="text-gray-400 hover:text-red-500 hover:bg-red-50 disabled:opacity-50"
-                >
-                  <X className="h-5 w-5" />
-                </Button>
               </div>
-            </div>
-
-            {/* Upload Progress */}
-            {isUploading && (
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium text-gray-700">Uploading...</span>
-                  <span className="text-blue-600 font-semibold">{Math.round(uploadProgressLocal)}%</span>
+            ) : (
+              <div className="p-8">
+                {/* File Display */}
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 mb-6 border border-purple-200">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="p-4 bg-gradient-to-r from-purple-600 to-purple-800 rounded-2xl shadow-lg">
+                        {getFileIcon(fileDetails?.filename)}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900">
+                          {fileDetails?.filename}
+                        </h3>   
+                        <p className="text-gray-500">
+                          Added {fileDetails?.uploaded_at ? new Date(fileDetails.uploaded_at).toLocaleDateString() : 'recently'}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={onFileRemove}
+                      disabled={isUploading}
+                      className="text-gray-400 hover:text-red-500 hover:bg-red-50 disabled:opacity-50 rounded-xl p-3"
+                    >
+                      <X className="h-5 w-5" />
+                    </Button>
+                  </div>
                 </div>
-                <Progress value={uploadProgressLocal} className="w-full h-2" />
-                <p className="text-xs text-gray-500 text-center">
-                  Please wait while your file is being processed
-                </p>
+
+                {/* Upload Progress */}
+                {isUploading && (
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-gray-700 flex items-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin text-purple-600" />
+                        AI Processing Document
+                      </span>
+                      <span className="text-purple-600 font-bold text-lg">{Math.round(uploadProgressLocal)}%</span>
+                    </div>
+                    <Progress 
+                      value={uploadProgressLocal} 
+                      className="w-full h-3 bg-purple-100 rounded-full" 
+                    />
+                    <p className="text-center text-gray-600">
+                      Extracting insights and preparing for analysis...
+                    </p>
+                  </div>
+                )}
+
+                {/* Status Messages */}
+                {uploadError && (
+                  <div className="flex items-center gap-4 p-5 bg-red-50 border border-red-200 rounded-2xl mb-6">
+                    <div className="p-2 bg-red-100 rounded-xl">
+                      <AlertCircle className="h-6 w-6 text-red-500" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-red-800">Processing Failed</p>
+                      <p className="text-red-700">{uploadError}</p>
+                    </div>
+                  </div>
+                )}
+
+                {uploadedFile && !uploadError && !isUploading && (
+                  <div className="flex items-center gap-4 p-5 bg-green-50 border border-green-200 rounded-2xl">
+                    <div className="p-2 bg-green-100 rounded-xl">
+                      <CheckCircle className="h-6 w-6 text-green-500" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-semibold text-green-800">Ready for Analysis!</p>
+                      <p className="text-green-700">
+                        Your document is processed and ready for questions.
+                      </p>
+                    </div>
+                    <Button className="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white px-4 py-2 rounded-xl">
+                      Start Chat
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
-
-            {/* Error Message */}
-            {uploadError && (
-              <div className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-xl">
-                <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
-                <div>
-                  <p className="text-sm font-medium text-red-800">Upload Failed</p>
-                  <p className="text-sm text-red-700">{uploadError}</p>
-                </div>
-              </div>
-            )}
-
-            {/* Success Message */}
-            {uploadedFile && !uploadError && !isUploading && (
-              <div className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-xl">
-                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                <div>
-                  <p className="text-sm font-medium text-green-800">File Ready!</p>
-                  <p className="text-sm text-green-700">
-                    Your document has been uploaded successfully and is ready for questions.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </CardContent>
-    </Card>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   );
 }
