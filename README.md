@@ -1,46 +1,100 @@
-# Getting Started with Create React App
+# DocAI Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, AI-powered document analysis platform built with React and TypeScript. DocAI allows users to upload documents and interact with them through an intelligent chat interface powered by advanced AI technology.
 
-## Available Scripts
+## 🚀 Live Demo
 
-In the project directory, you can run:
+Visit the live application at: [https://doc-ai-fast.netlify.app](https://doc-ai-fast.netlify.app)
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 📄 Document Upload & Analysis
+- **Multi-format Support**: Upload PDF, TXT, DOC, and DOCX files
+- **File Validation**: Automatic file type and size validation (max 10MB)
+- **Real-time Progress**: Visual upload progress with AI processing indicators
+- **Drag & Drop Interface**: Intuitive file upload experience
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 🤖 AI-Powered Chat Interface
+- **Intelligent Document Analysis**: AI processes and understands your documents
+- **Interactive Q&A**: Ask questions about your uploaded documents
+- **Real-time Responses**: Get instant answers powered by advanced AI
+- **Context-Aware**: Maintains conversation context throughout the session
 
-### `npm test`
+### �� User Authentication
+- **Secure Login/Signup**: Complete user authentication system
+- **Email Activation**: Account activation via email verification
+- **Session Management**: Persistent user sessions with localStorage
+- **Protected Routes**: Secure access to document features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 💰 Flexible Pricing Plans
+- **Free Tier**: 10 documents per month with basic AI analysis
+- **Professional Plan**: Unlimited documents with advanced features
+- **Enterprise Solutions**: Custom pricing for large organizations
 
-### `npm run build`
+### 🎨 Modern UI/UX
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
+- **Beautiful Animations**: Smooth transitions and micro-interactions
+- **Dark/Light Theme**: Adaptive theming system
+- **Accessibility**: Built with accessibility best practices
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ��️ Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Frontend
+- **React 19** - Modern React with latest features
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Router** - Client-side routing
+- **TanStack Query** - Data fetching and caching
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Beautiful icon library
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### UI Components
+- **Custom Design System** - Consistent, reusable components
+- **Responsive Grid** - Mobile-first responsive design
+- **Toast Notifications** - User feedback system
+- **Modal Dialogs** - Interactive overlays
+- **Progress Indicators** - Visual feedback for async operations
 
-### `npm run eject`
+### Development Tools
+- **Create React App** - Zero-configuration setup
+- **ESLint** - Code linting and formatting
+- **Jest** - Unit testing framework
+- **Testing Library** - Component testing utilities
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🚀 Getting Started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn package manager
+- Git
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Installation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. **Clone the repository**
+   ```bash
+   git clone .....
+   cd docai-frontend
+   ```
 
-## Learn More
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **Set up environment variables**
+   Create a `.env` file in the root directory:
+   ```env
+   REACT_APP_API_URL=https://docaibackend-41i1.onrender.com
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. **Start the development server**
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+
+5. **Open your browser**
+   Navigate to [http://localhost:4800](http://localhost:4800)
