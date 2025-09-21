@@ -30,9 +30,15 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    try {
     
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
+      toast({
+        title: "Passwords do not match",
+        description: "Please check your passwords",
+        variant: "destructive",
+      });
       return;
     }
     
@@ -52,11 +58,16 @@ const Signup = () => {
         description: "Please check your email to verify your account",
       });
     }
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+  } catch (error) {
+    toast({
+      title: "Error",
+      description: axios.isAxiosError(error) ? error.response?.data?.error || "Failed to sign up" : "Failed to sign up",
+      variant: "destructive",
+    });
+  }
+  finally {
+    setIsLoading(false);
+  } 
   };
 
   return (

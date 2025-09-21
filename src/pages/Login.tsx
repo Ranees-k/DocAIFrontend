@@ -29,10 +29,12 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log(API_BASE_URL, "API_BASE_URL");
 
     try {
       const response = await axios.post(`${API_BASE_URL}/auth/login`, formData);
+      console.log('Full response object:', response);
+
+      console.log(response, "response.data");
       if (response.status === 200) {
         localStorage.setItem('authToken', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -44,7 +46,13 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Login failed:', error);
+      toast({
+        variant: "destructive",
+        title: "Login failed",
+        description: "Invalid email or password",
+      });
     }
+
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
