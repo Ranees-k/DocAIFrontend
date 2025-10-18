@@ -12,7 +12,7 @@ const getApiBaseUrl = () => {
   
   // Fallback - use the production URL directly
   console.log('Environment variable not loaded, using production URL');
-  return 'https://docaibackend-41i1.onrender.com';
+  return 'http://localhost:5001';
 };
 
 const API_BASE_URL = getApiBaseUrl();
