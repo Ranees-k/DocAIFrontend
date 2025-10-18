@@ -138,6 +138,17 @@ const Login = () => {
                   </Button>
                 </div>
               </div>
+
+              {/* Forgot Password Link */}
+              <div className="text-right">
+                <Link 
+                  to="/forgot-password" 
+                  className="text-sm text-purple-600 hover:text-purple-700 font-medium hover:underline transition-colors"
+                  onClick={() => navigate('/forgot-password')}
+                >
+                  Forgot your password?
+                </Link>
+              </div>
             </CardContent>
             
             <CardFooter className="flex flex-col space-y-6 px-8 pb-8">
