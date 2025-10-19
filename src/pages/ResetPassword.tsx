@@ -51,10 +51,10 @@ const ResetPassword = () => {
     }
 
     setIsLoading(true);
+    console.log(token, "token");  console.log(API_BASE_URL, "API_BASE_URL");
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/auth/reset-password`, {
-        token,
+      const response = await axios.post(`${API_BASE_URL}/auth/reset-password/${token}`, {
         password: formData.password
       });
       
