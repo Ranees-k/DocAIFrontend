@@ -77,7 +77,7 @@ export const buildApiUrl = (endpoint: string): string => {
 // API Configuration object
 export const API_CONFIG = {
   BASE_URL: API_BASE_URL,
-  TIMEOUT: 30000, // 30 seconds
+  TIMEOUT: 60000, // 30 seconds
   RETRY_ATTEMPTS: 3,
   RETRY_DELAY: 1000, // 1 second
 };
